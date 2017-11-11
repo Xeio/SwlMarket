@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2008
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwlMarket", "SwlMarket\SwlMarket.csproj", "{5ED5F94A-302B-4E6C-8583-82A28147D7B2}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SwlMarketDb", "SwlMarketDb\SwlMarketDb.sqlproj", "{7CE7FF6D-6C6D-440B-919E-38636A77F7A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5ED5F94A-302B-4E6C-8583-82A28147D7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED5F94A-302B-4E6C-8583-82A28147D7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED5F94A-302B-4E6C-8583-82A28147D7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED5F94A-302B-4E6C-8583-82A28147D7B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CE7FF6D-6C6D-440B-919E-38636A77F7A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CE7FF6D-6C6D-440B-919E-38636A77F7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CE7FF6D-6C6D-440B-919E-38636A77F7A1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7CE7FF6D-6C6D-440B-919E-38636A77F7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CE7FF6D-6C6D-440B-919E-38636A77F7A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CE7FF6D-6C6D-440B-919E-38636A77F7A1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9275420C-0206-450F-B73E-95C6A30ACAC1}
+	EndGlobalSection
+EndGlobal

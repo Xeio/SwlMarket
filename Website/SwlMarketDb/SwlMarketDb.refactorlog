@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="4eff401d-4b4b-4bbd-aa41-ae4a073dc822" ChangeDateTime="11/10/2017 06:42:22">
+    <Property Name="ElementName" Value="[dbo].[ApiKeys].[Guid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ApiKeys]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Key" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="eb640f7b-5173-4494-952e-a76478070ce6" ChangeDateTime="11/10/2017 21:54:20">
+    <Property Name="ElementName" Value="[dbo].[Prices].[Time]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Prices]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ExpireAt" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6ae3002c-f4f4-4ffc-a9aa-cf0a98b9af18" ChangeDateTime="11/10/2017 22:03:22">
+    <Property Name="ElementName" Value="[dbo].[Prices].[ExpireAt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Prices]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ExpiresAt" />
+  </Operation>
+</Operations>
