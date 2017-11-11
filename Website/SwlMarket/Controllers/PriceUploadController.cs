@@ -41,7 +41,7 @@ namespace SwlMarket.Controllers
                 item.ItemCategory = category;
             }
 
-            var newPrice = new Price() { Item = item, Marks = price.Value, ExpiresAt = DateTime.Now.AddSeconds(expiresIn.Value), ApiKey = key };
+            var newPrice = new Price() { Item = item, Marks = price.Value, Time = DateTime.Now, ExpiresIn = expiresIn.Value, ApiKey = key };
             _marketContext.Prices.Add(newPrice);
 
             await _marketContext.SaveChangesAsync();

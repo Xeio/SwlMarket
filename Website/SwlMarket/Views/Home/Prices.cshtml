@@ -6,42 +6,29 @@
 
 <h2>Prices</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Item)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Marks)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpiresAt)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var group in Model.GroupBy(i => i.Item.ItemCategory))
-        {
-            <tr>
-                <td colspan="3">@Html.Encode(group.Key?.ToString() ?? "Uncategorized")</td>
-            </tr>
-            @foreach (var item in group)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Item.Name)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Marks)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ExpiresAt)
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
+@foreach (var group in Model.GroupBy(i => i.Item.ItemCategory).OrderBy(g => g.Key))
+{
+    var groupName = group.Key?.ToString() ?? "Uncategorized";
+    var divId = "data" + groupName;
+    <h3 data-toggle="collapse" data-target="@Html.Encode("#"+divId)">@Html.Encode(groupName)</h3>
+    <div id="@Html.Encode(divId)" class="collapse">
+        <table class="table">
+            <tbody>
+                @foreach (var item in group)
+                {
+                    <tr>
+                        <td class="@Html.DisplayFor(modelItem => item.Item.Rarity)">
+                            @Html.DisplayFor(modelItem => item.Item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Marks)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExpiresAt)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
