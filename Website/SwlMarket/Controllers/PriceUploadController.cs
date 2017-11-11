@@ -19,7 +19,13 @@ namespace SwlMarket.Controllers
         }
 
         [HttpGet]
-        public async Task<bool> Get([FromQuery]string name, [FromQuery]int? price, [FromQuery]Rarity? rarity, [FromQuery]ItemCategory? category, [FromQuery]int? expiresIn, [FromQuery]string apiKey)
+        public async Task<bool> Get([FromQuery]string name,
+            [FromQuery]int? price, 
+            [FromQuery]Rarity? rarity, 
+            [FromQuery]ItemCategory? category, 
+            [FromQuery]int? expiresIn, 
+            [FromQuery]string apiKey,
+            [FromQuery]bool? extraordinary)
         {
             if (string.IsNullOrWhiteSpace(name)) return false;
             if (price == null) return false;
@@ -36,9 +42,13 @@ namespace SwlMarket.Controllers
             {
                 item = new Item() { Name = name, Rarity = rarity, ItemCategory = category };
             }
-            if(item.ItemCategory != category)
+            if(item.ItemCategory == null)
             {
                 item.ItemCategory = category;
+            }
+            if(item.IsExtraordinary == null)
+            {
+                item.IsExtraordinary = extraordinary;
             }
 
             var newPrice = new Price() { Item = item, Marks = price.Value, Time = DateTime.Now, ExpiresIn = expiresIn.Value, ApiKey = key };

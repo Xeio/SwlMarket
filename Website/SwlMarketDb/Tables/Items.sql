@@ -4,6 +4,7 @@
     [Name] VARCHAR(100) NOT NULL , 
     [ItemCategory] INT NULL, 
     [Rarity] INT NOT NULL, 
+    [IsExtraordinary] BIT NULL, 
     PRIMARY KEY ([Id]), 
     UNIQUE ([Name], [Rarity]),
 )

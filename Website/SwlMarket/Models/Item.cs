@@ -56,5 +56,6 @@ namespace SwlMarket.Models
         public string Name { get; set; }
         public ItemCategory? ItemCategory { get; set; }
         public Rarity? Rarity { get; set; }
+        public bool? IsExtraordinary { get; set; }
     }
 }
