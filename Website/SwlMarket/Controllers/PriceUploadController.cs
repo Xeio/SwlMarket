@@ -25,7 +25,7 @@ namespace SwlMarket.Controllers
             [FromQuery]ItemCategory? category, 
             [FromQuery]int? expiresIn, 
             [FromQuery]string apiKey,
-            [FromQuery]bool? extraordinary)
+            [FromQuery(Name = "ext")]bool? extraordinary)
         {
             if (string.IsNullOrWhiteSpace(name)) return false;
             if (price == null) return false;
