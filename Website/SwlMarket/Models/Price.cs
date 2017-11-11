@@ -15,7 +15,12 @@ namespace SwlMarket.Models
         [DisplayFormat]
         public DateTime ExpiresAt { get; set; }
         public int Marks { get; set; }
+        public int? ApiKeyId { get; set; }
 
         public Item Item { get; set; }
+        /// <summary>
+        /// API Key used to upload this price
+        /// </summary>
+        public ApiKey ApiKey { get; set; }
     }
 }

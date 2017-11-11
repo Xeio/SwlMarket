@@ -50,6 +50,7 @@ class com.xeio.SwlMarket.MarketApi
                             "&price=" + item.m_TokenType1_Amount +
                             "&expiresIn=" + item.m_ExpireDate +
                             "&rarity=" + item.m_Item.m_Rarity +
+                            "&category=" + item.m_Item.m_ItemTypeGUI +
                             "&apiKey=" + escape(DistributedValue.GetDValue("SwlMarket_ApiKey"));
         
         m_Browser.OpenURL(url);
