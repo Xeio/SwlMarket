@@ -15,6 +15,12 @@ class com.xeio.SwlMarket.MarketApi
     
     public function QueuePriceSubmit(newPrice: TradepostSearchResultData)
     {
+        if (!DistributedValue.GetDValue("SwlMarket_ApiKey") || DistributedValue.GetDValue("SwlMarket_ApiKey") == " ")
+        {
+            //Not configured, no-op
+            return;
+        }
+        
         m_itemsToSubmit.push(newPrice);
         
         if(!m_Browser)
