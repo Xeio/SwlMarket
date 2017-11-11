@@ -65,8 +65,15 @@ class com.xeio.SwlMarket.SwlMarket
         {
             var result:TradepostSearchResultData = Tradepost.m_SearchResults[i];
             
-            if (!minimumPrices[result.m_Item.m_Name] || minimumPrices[result.m_Item.m_Name].m_TokenType1_Amount > result.m_TokenType1_Amount)
+            var price:Number = result.m_TokenType1_Amount;
+            if (result.m_Item.m_StackSize > 1)
             {
+                price = Math.round(price / result.m_Item.m_StackSize);
+            }
+            
+            if (!minimumPrices[result.m_Item.m_Name] || minimumPrices[result.m_Item.m_Name].u_price > price)
+            {
+                result["u_price"] = price;
                 minimumPrices[result.m_Item.m_Name] = result;
             }
         }        

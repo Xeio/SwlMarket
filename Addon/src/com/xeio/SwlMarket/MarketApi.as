@@ -47,7 +47,7 @@ class com.xeio.SwlMarket.MarketApi
         
         var url:String = DistributedValue.GetDValue("SwlMarket_Url") +
                             "/api/PriceUpload?name=" + escape(item.m_Item.m_Name) +
-                            "&price=" + item.m_TokenType1_Amount +
+                            "&price=" + item["u_price"] +
                             "&expiresIn=" + item.m_ExpireDate +
                             "&rarity=" + item.m_Item.m_Rarity +
                             "&category=" + item.m_Item.m_ItemTypeGUI +
