@@ -21,7 +21,7 @@ namespace SwlMarket.Models
         HeadTalisman = 116054996,
         FingerTalisman = 184609570,
         NeckTalisman = 116095803,
-        WristTalisman = 247368388,
+        WristTalisman = 247306948,
         LuckTalisman = 246461513,
         WaistTalisman = 247368388,
         OccultTalisman = 191434452,
