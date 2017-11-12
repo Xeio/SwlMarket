@@ -1,5 +1,3 @@
-using System;
-
 namespace SwlMarket.Models
 {
     public class ErrorViewModel
