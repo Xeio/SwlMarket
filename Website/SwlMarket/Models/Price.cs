@@ -14,6 +14,7 @@ namespace SwlMarket.Models
         public int ItemID { get; set; }
         public DateTime Time { get; set; }
         public int? ExpiresIn { get; set; }
+        [DisplayFormat(DataFormatString = "{0:##,###,##0}")]
         public int Marks { get; set; }
         public int? ApiKeyId { get; set; }
 
@@ -24,7 +25,7 @@ namespace SwlMarket.Models
         public ApiKey ApiKey { get; set; }
 
         [DisplayName("Expires At")]
-        [DisplayFormat(NullDisplayText = "Expired")]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd hh:mm tt}", NullDisplayText = "Expired")]
         [NotMapped]
         public DateTime? ExpiresAt
         {
