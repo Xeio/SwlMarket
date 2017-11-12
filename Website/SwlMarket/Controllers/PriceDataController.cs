@@ -28,8 +28,8 @@ namespace SwlMarket.Controllers
 
             var result = new
             {
-                x = prices.Select(p => p.Time.TimeOfDay.TotalSeconds == 0 ? p.Time.ToString("yyyy-MM-dd") : p.Time.ToString("yyyy-MM-dd HH:mm")).ToList(),
-                y = prices.Select(p => p.Marks).ToList()
+                dates = prices.Select(p => p.Time.TimeOfDay.TotalSeconds == 0 ? p.Time.ToString("yyyy-MM-dd") : p.Time.ToString("yyyy-MM-dd HH:mm")).ToList(),
+                prices = prices.Select(p => p.Marks).ToList()
             };
 
             return Json(result);
