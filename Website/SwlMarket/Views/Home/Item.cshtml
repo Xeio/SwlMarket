@@ -1,0 +1,31 @@
+﻿@model SwlMarket.Models.Item
+
+<h3 class="@Html.DisplayFor(modelitem => Model.Rarity)">@Html.DisplayFor(modelItem => Model.Name)</h3>
+<div id="priceChart">
+
+</div>
+
+@section scripts
+{
+    <script>
+        var priceData = {
+            type: 'scatter',
+            mode: 'lines+markers',
+        };
+
+        $.ajax({
+            url: @Html.Raw($"'{Url.Content("~/api/PriceData/Item/" +Model.ID)}'"),
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                priceData.x = result.x;
+                priceData.y = result.y;
+                Plotly.plot('priceChart', [priceData]);
+            },
+            error: function () {
+                $('#priceChart').html("Unable to retrieve pricing data");
+            }
+        });
+    </script>
+}

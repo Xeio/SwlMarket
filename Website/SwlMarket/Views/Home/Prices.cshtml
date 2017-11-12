@@ -17,8 +17,8 @@
                 @foreach (var item in group)
                 {
                     <tr>
-                        <td class="@Html.DisplayFor(modelItem => item.Item.Rarity)">
-                            @Html.DisplayFor(modelItem => item.Item.Name)
+                        <td>
+                            <a class="@item.Item.Rarity" asp-controller="Home" asp-action="Item" asp-route-id="@item.ItemID">@Html.DisplayFor(modelItem => item.Item.Name)</a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Marks)

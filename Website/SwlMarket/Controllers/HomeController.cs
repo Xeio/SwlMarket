@@ -65,6 +65,19 @@ namespace SwlMarket.Controllers
             return true;
         }
 
+        [HttpGet("/Home/Item/{id}")]
+        public async Task<IActionResult> Item(int id)
+        {
+            var item = await _marketContext.Items.SingleOrDefaultAsync(i => i.ID == id);
+            
+            if(item == null)
+            {
+                return NotFound();
+            }
+
+            return View(item);
+        }
+
         public IActionResult About()
         {
             return View();
