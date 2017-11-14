@@ -5,6 +5,75 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\bootstrap\fonts\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\grunt\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\js\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\less\**" />
+    <Compile Remove="wwwroot\lib\bootstrap\nuget\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation\build\**" />
+    <Compile Remove="wwwroot\lib\jquery-validation\src\**" />
+    <Compile Remove="wwwroot\lib\jquery\external\**" />
+    <Compile Remove="wwwroot\lib\jquery\src\**" />
+    <Content Remove="wwwroot\lib\bootstrap\fonts\**" />
+    <Content Remove="wwwroot\lib\bootstrap\grunt\**" />
+    <Content Remove="wwwroot\lib\bootstrap\js\**" />
+    <Content Remove="wwwroot\lib\bootstrap\less\**" />
+    <Content Remove="wwwroot\lib\bootstrap\nuget\**" />
+    <Content Remove="wwwroot\lib\jquery-validation\build\**" />
+    <Content Remove="wwwroot\lib\jquery-validation\src\**" />
+    <Content Remove="wwwroot\lib\jquery\external\**" />
+    <Content Remove="wwwroot\lib\jquery\src\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\grunt\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\js\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\less\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\nuget\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation\build\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-validation\src\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery\external\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery\src\**" />
+    <None Remove="wwwroot\lib\bootstrap\fonts\**" />
+    <None Remove="wwwroot\lib\bootstrap\grunt\**" />
+    <None Remove="wwwroot\lib\bootstrap\js\**" />
+    <None Remove="wwwroot\lib\bootstrap\less\**" />
+    <None Remove="wwwroot\lib\bootstrap\nuget\**" />
+    <None Remove="wwwroot\lib\jquery-validation\build\**" />
+    <None Remove="wwwroot\lib\jquery-validation\src\**" />
+    <None Remove="wwwroot\lib\jquery\external\**" />
+    <None Remove="wwwroot\lib\jquery\src\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\lib\bootstrap\.bower.json" />
+    <Content Remove="wwwroot\lib\bootstrap\bower.json" />
+    <Content Remove="wwwroot\lib\bootstrap\CHANGELOG.md" />
+    <Content Remove="wwwroot\lib\bootstrap\Gemfile" />
+    <Content Remove="wwwroot\lib\bootstrap\Gemfile.lock" />
+    <Content Remove="wwwroot\lib\bootstrap\Gruntfile.js" />
+    <Content Remove="wwwroot\lib\bootstrap\ISSUE_TEMPLATE.md" />
+    <Content Remove="wwwroot\lib\bootstrap\package.js" />
+    <Content Remove="wwwroot\lib\bootstrap\package.json" />
+    <Content Remove="wwwroot\lib\bootstrap\README.md" />
+    <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\.bower.json" />
+    <Content Remove="wwwroot\lib\jquery-validation-unobtrusive\bower.json" />
+    <Content Remove="wwwroot\lib\jquery-validation\.bower.json" />
+    <Content Remove="wwwroot\lib\jquery-validation\bower.json" />
+    <Content Remove="wwwroot\lib\jquery-validation\changelog.md" />
+    <Content Remove="wwwroot\lib\jquery-validation\CONTRIBUTING.md" />
+    <Content Remove="wwwroot\lib\jquery-validation\Gruntfile.js" />
+    <Content Remove="wwwroot\lib\jquery-validation\package.json" />
+    <Content Remove="wwwroot\lib\jquery-validation\README.md" />
+    <Content Remove="wwwroot\lib\jquery-validation\validation.jquery.json" />
+    <Content Remove="wwwroot\lib\jquery\.bower.json" />
+    <Content Remove="wwwroot\lib\jquery\AUTHORS.txt" />
+    <Content Remove="wwwroot\lib\jquery\bower.json" />
+    <Content Remove="wwwroot\lib\jquery\README.md" />
+    <Content Remove="wwwroot\lib\plotlyjs\.bower.json" />
+    <Content Remove="wwwroot\lib\plotlyjs\bower.json" />
+    <Content Remove="wwwroot\lib\plotlyjs\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
   </ItemGroup>
