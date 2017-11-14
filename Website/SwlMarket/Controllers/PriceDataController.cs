@@ -22,13 +22,13 @@ namespace SwlMarket.Controllers
         {
             var prices = await _marketContext.Prices
                 .Where(p => p.ItemID == id)
-                .Include(p => p.Item)
+                .OrderBy(p => p.Time)
                 .AsNoTracking()
                 .ToListAsync();
 
             var result = new
             {
-                dates = prices.Select(p => p.Time.TimeOfDay.TotalSeconds == 0 ? p.Time.ToString("yyyy-MM-dd") : p.Time.ToString("yyyy-MM-dd HH:mm")).ToList(),
+                dates = prices.Select(p => p.Time.ToString("yyyy-MM-dd HH:mm")).ToList(),
                 prices = prices.Select(p => p.Marks).ToList()
             };
 

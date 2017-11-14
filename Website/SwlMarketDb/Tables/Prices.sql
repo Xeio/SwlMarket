@@ -7,3 +7,7 @@
     [ApiKeyId] INT NULL, 
     [ExpiresIn] INT NULL
 )
+
+GO
+
+CREATE INDEX [IX_Prices_ItemId] ON [dbo].[Prices] ([ItemId]) INCLUDE ([Id],[Time],[Marks],[ApiKeyId],[ExpiresIn])
