@@ -23,7 +23,8 @@ namespace SwlMarket.Controllers
                 .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
                 .Include(p => p.Item)
                 .Where(p => ShowOnHome(p.Item))
-                .OrderBy(p => p.Item.Name)
+                .OrderByDescending(p => p.Item.Rarity)
+                .ThenBy(p => p.Item.Name)
                 .AsNoTracking()
                 .ToListAsync();
 

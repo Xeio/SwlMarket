@@ -4,13 +4,12 @@
     ViewData["Title"] = "Prices";
 }
 
-<h2>Prices</h2>
+<h2>Categories</h2>
 
-@foreach (var group in Model.GroupBy(i => i.Item.ItemCategory).OrderBy(g => g.Key))
+@foreach (var group in Model.GroupBy(i => i.Item.ItemCategory).OrderBy(g => g.Key.DisplayName("Uncategorized")))
 {
-    var groupName = group.Key?.ToString() ?? "Uncategorized";
-    var divId = "data" + groupName;
-    <h3 data-toggle="collapse" data-target="@Html.Encode("#"+divId)">@Html.Encode(groupName)</h3>
+    var divId = "data" + group.Key;
+    <h3 data-toggle="collapse" data-target="@Html.Encode("#"+divId)">@group.Key.DisplayName("Uncategorized")</h3>
     <div id="@Html.Encode(divId)" class="collapse">
         <table class="table table-striped table-hover">
             <thead>

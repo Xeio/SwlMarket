@@ -1,4 +1,6 @@
-﻿namespace SwlMarket.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SwlMarket.Models
 {
     public enum ItemCategory
     {
@@ -12,22 +14,34 @@
         Gadget = 226155763,
         Museum = 88906941,
         //Talisman
+        [Display(Name = "Head Talisman")]
         HeadTalisman = 116054996,
+        [Display(Name = "Finger Talisman")]
         FingerTalisman = 184609570,
+        [Display(Name = "Neck Talisman")]
         NeckTalisman = 116095803,
+        [Display(Name = "Wrist Talisman")]
         WristTalisman = 247306948,
+        [Display(Name = "Luck Talisman")]
         LuckTalisman = 246461513,
+        [Display(Name = "Waist Talisman")]
         WaistTalisman = 247368388,
+        [Display(Name = "Occult Talisman")]
         OccultTalisman = 191434452,
         //Upgrade
         Signet = 94364868,
         Glyph = 5128296,
         //Weapon
         Shotgun = 41012030,
+        [Display(Name = "Blood Magic Focus")]
         BloodMagicFocus = 205690740,
+        [Display(Name = "Fist Weapon")]
         FistWeapon = 4394078,
+        [Display(Name = "Assault Rifle")]
         AssaultRifle = 91624581,
+        [Display(Name = "Chaos Focus")]
         ChaosFocus = 166678788,
+        [Display(Name = "Elementalism Focus")]
         ElementalismFocus = 71672516,
         Pistols = 244175283,
         Hammer = 157308306,
