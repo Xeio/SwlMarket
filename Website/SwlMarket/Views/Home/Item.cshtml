@@ -14,10 +14,7 @@
         };
 
         $.ajax({
-            url: @Html.Raw($"'{Url.Content("~/api/PriceData/Item/" +Model.ID)}'"),
-            type: "GET",
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
+            url: @Html.Raw($"'{Url.Action("Item", "PriceData", Model.ID)}'"),
             success: function (result) {
                 priceData.x = result.dates;
                 priceData.y = result.prices;
