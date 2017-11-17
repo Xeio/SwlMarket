@@ -1,0 +1,16 @@
+﻿@model IEnumerable<SwlMarket.Models.Price>
+
+@{
+    ViewData["Title"] = "Prices";
+}
+
+<h2>Search Results</h2>
+
+@if (Model.Any())
+{
+    @Html.Partial("PriceDataTable", Model)
+}
+else
+{
+    <span>No results</span>
+}

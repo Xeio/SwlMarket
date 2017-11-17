@@ -19,7 +19,7 @@ namespace SwlMarket.Controllers
         public async Task<IActionResult> Prices()
         {
             //Entity core framework 2.1 should support group-by better, but this may always be best as sql?
-            var x = _marketContext.Prices
+            var prices = _marketContext.Prices
                 .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
                 .Include(p => p.Item)
                 .Where(p => ShowOnHome(p.Item))
@@ -28,7 +28,7 @@ namespace SwlMarket.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
-            return View(await x);
+            return View(await prices);
         }
 
         private bool ShowOnHome(Item item)
@@ -75,6 +75,22 @@ namespace SwlMarket.Controllers
             }
 
             return View(item);
+        }
+        
+        public async Task<IActionResult> Search([FromQuery]string name)
+        {
+            var items = await _marketContext.Items.Where(i => i.Name.Contains(name)).Select(i => i.ID).ToListAsync();
+
+            var prices = _marketContext.Prices
+                .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
+                .Include(p => p.Item)
+                .OrderByDescending(p => p.Item.Rarity)
+                .ThenBy(p => p.Item.Name)
+                .Where(p => items.Contains(p.ItemID))
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(await prices);
         }
 
         public IActionResult About()
