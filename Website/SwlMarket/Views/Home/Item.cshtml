@@ -14,7 +14,7 @@
         };
 
         $.ajax({
-            url: @Html.Raw($"'{Url.Action("Item", "PriceData", Model.ID)}'"),
+            url: '@Url.Action("Item", "PriceData", Model.ID)',
             success: function (result) {
                 priceData.x = result.dates;
                 priceData.y = result.prices;
