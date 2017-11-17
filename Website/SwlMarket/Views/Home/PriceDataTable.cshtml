@@ -3,31 +3,18 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Item.Name)
-            </th>
-            <th class="text-right">
-                @Html.DisplayNameFor(model => model.Marks)
-            </th>
-            <th class="text-right">
-                @Html.DisplayNameFor(model => model.ExpiresAt)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Item.Name)</th>
+            <th class="text-right">@Html.DisplayNameFor(model => model.Marks)</th>
+            <th class="text-right">@Html.DisplayNameFor(model => model.ExpiresAt)</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    <a class="@item.Item.Rarity" asp-controller="Home" asp-action="Item" asp-route-id="@item.ItemID">@Html.DisplayFor(model => item.Item.Name)</a>
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(model => item.Marks)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(model => item.ExpiresAt)
-                </td>
+                <td><a class="@item.Item.Rarity" asp-controller="Home" asp-action="Item" asp-route-id="@item.ItemID">@Html.DisplayFor(model => item.Item.Name)</a></td>
+                <td class="text-right">@Html.DisplayFor(model => item.Marks)</td>
+                <td class="text-right">@Html.DisplayFor(model => item.ExpiresAt)</td>
             </tr>
         }
     </tbody>
