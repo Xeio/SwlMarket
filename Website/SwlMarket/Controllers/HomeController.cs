@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SwlMarket.Models;
 using SwlMarket.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace SwlMarket.Controllers
 {
@@ -16,24 +17,23 @@ namespace SwlMarket.Controllers
             _marketContext = context;
         }
 
-        public async Task<IActionResult> Prices()
+        public IActionResult Prices()
         {
             //Entity core framework 2.1 should support group-by better, but this may always be best as sql?
             var prices = _marketContext.Prices
                 .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
                 .Include(p => p.Item)
-                .Where(p => ShowOnHome(p.Item))
+                .Where(ShowOnHome)
                 .OrderByDescending(p => p.Item.Rarity)
-                .ThenBy(p => p.Item.Name)
-                .AsNoTracking()
-                .ToListAsync();
+                .ThenBy(p => p.Item.Name);
 
-            return View(await prices);
+            return View(prices);
         }
 
-        private bool ShowOnHome(Item item)
+        private bool ShowOnHome(Price price)
         {
-            switch (item.ItemCategory)
+            if (price.Time.AddDays(3) < DateTime.Now) return false;
+            switch (price.Item.ItemCategory)
             {
                 case ItemCategory.AssaultRifle:
                 case ItemCategory.Blade:
@@ -44,9 +44,9 @@ namespace SwlMarket.Controllers
                 case ItemCategory.Hammer:
                 case ItemCategory.Pistols:
                 case ItemCategory.Shotgun:
-                    if (item.Rarity < Rarity.Superior) return false;
-                    if (item.Name.EndsWith("Mk I")) return false;
-                    return item.IsExtraordinary ?? false;
+                    if (price.Item.Rarity < Rarity.Superior) return false;
+                    if (price.Marks < 10000) return false;
+                    return price.Item.IsExtraordinary ?? false;
                 case ItemCategory.FingerTalisman:
                 case ItemCategory.HeadTalisman:
                 case ItemCategory.LuckTalisman:
@@ -54,12 +54,15 @@ namespace SwlMarket.Controllers
                 case ItemCategory.OccultTalisman:
                 case ItemCategory.WaistTalisman:
                 case ItemCategory.WristTalisman:
-                    if (item.Name.StartsWith("Faded ")) return false;
-                    return item.IsExtraordinary ?? false;
+                    return price.Item.Name.StartsWith("Radiant ") && (price.Item.IsExtraordinary ?? false);
                 case ItemCategory.Glyph:
-                    return item.Name.StartsWith("Intricate ");
+                    return price.Item.Name.StartsWith("Intricate ");
                 case ItemCategory.Gadget:
-                    return item.Rarity >= Rarity.Mythic;
+                    return price.Item.Rarity >= Rarity.Legendary;
+                case ItemCategory.Museum:
+                    return price.Item.Rarity >= Rarity.Mythic;
+                case ItemCategory.Clothing:
+                    return price.Item.Rarity >= Rarity.Epic;
             }
             return true;
         }
