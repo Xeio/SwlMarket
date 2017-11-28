@@ -2,6 +2,6 @@
 <Root>
   <Value name="SwlMarket" value="true" />
   <Value name="SwlMarket_ApiKey" value=" " />
-  <Value name="SwlMarket_Url" value="https://swlmarket.azurewebsites.com" />
+  <Value name="SwlMarket_Url" value="https://swlmarket.azurewebsites.net" />
   <Archive name="SwlMarket_Cfg" />
 </Root>
