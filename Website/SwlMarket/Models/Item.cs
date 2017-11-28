@@ -13,6 +13,7 @@ namespace SwlMarket.Models
         Essence = 197642084,
         Gadget = 226155763,
         Museum = 88906941,
+        Miscellaneous = 109918787,
         //Talisman
         [Display(Name = "Head Talisman")]
         HeadTalisman = 116054996,
