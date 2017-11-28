@@ -32,7 +32,7 @@ namespace SwlMarket.Controllers
 
         private bool ShowOnHome(Price price)
         {
-            if (price.Time.AddDays(3) < DateTime.Now) return false;
+            if (price.Time.AddDays(7) < DateTime.Now) return false;
             switch (price.Item.ItemCategory)
             {
                 case ItemCategory.AssaultRifle:
@@ -54,13 +54,15 @@ namespace SwlMarket.Controllers
                 case ItemCategory.OccultTalisman:
                 case ItemCategory.WaistTalisman:
                 case ItemCategory.WristTalisman:
-                    return price.Item.Name.StartsWith("Radiant ") && (price.Item.IsExtraordinary ?? false);
+                    if (price.Marks < 2000) return false;
+                    if (!price.Item.Name.StartsWith("Radiant ")) return false;
+                    return price.Item.IsExtraordinary ?? false;
                 case ItemCategory.Glyph:
                     return price.Item.Name.StartsWith("Intricate ");
                 case ItemCategory.Gadget:
                     return price.Item.Rarity >= Rarity.Legendary;
                 case ItemCategory.Museum:
-                    return price.Item.Rarity >= Rarity.Mythic;
+                    return price.Marks > 1000;
                 case ItemCategory.Clothing:
                     return price.Item.Rarity >= Rarity.Epic;
             }
