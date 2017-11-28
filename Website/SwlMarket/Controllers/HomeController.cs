@@ -82,7 +82,11 @@ namespace SwlMarket.Controllers
         
         public async Task<IActionResult> Search([FromQuery]string name)
         {
-            var items = await _marketContext.Items.Where(i => i.Name.Contains(name)).Select(i => i.ID).ToListAsync();
+            var items = await _marketContext.Items
+                .Where(i => i.Name.Contains(name))
+                .Take(40)
+                .Select(i => i.ID)
+                .ToListAsync();
 
             var prices = _marketContext.Prices
                 .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
@@ -93,6 +97,8 @@ namespace SwlMarket.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
+            ViewData["HasMaxItems"] = items.Count == 40;
+            
             return View(await prices);
         }
 

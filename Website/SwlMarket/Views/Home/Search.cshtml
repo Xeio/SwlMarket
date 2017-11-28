@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<SwlMarket.Models.Price>
 
-@{
-    ViewData["Title"] = "Prices";
-}
-
 <h2>Search Results</h2>
 
+@if ((bool)ViewData["HasMaxItems"])
+{
+    <span><strong>Search results limited to 40. You may want to narrow your search.</strong></span>
+}
 @if (Model.Any())
 {
     @Html.Partial("PriceDataTable", Model)
