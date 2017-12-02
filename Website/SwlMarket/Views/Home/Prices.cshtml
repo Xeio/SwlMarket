@@ -9,8 +9,8 @@
 @foreach (var group in Model.GroupBy(i => i.Item.ItemCategory).OrderBy(g => g.Key.DisplayName("Uncategorized")))
 {
     var divId = "data" + group.Key;
-    <h3 data-toggle="collapse" data-target="@Html.Encode("#"+divId)">@group.Key.DisplayName("Uncategorized")</h3>
-    <div id="@Html.Encode(divId)" class="collapse">
+    <h3 data-toggle="collapse" data-target="@("#"+divId)">@group.Key.DisplayName("Uncategorized")</h3>
+    <div id="@divId" class="collapse">
         @Html.Partial("PriceDataTable", group)
     </div>
 }

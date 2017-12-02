@@ -19,7 +19,6 @@ namespace SwlMarket.Controllers
 
         public IActionResult Prices()
         {
-            //Entity core framework 2.1 should support group-by better, but this may always be best as sql?
             var prices = _marketContext.Prices
                 .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
                 .Include(p => p.Item)

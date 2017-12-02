@@ -11,10 +11,10 @@
     <tbody>
         @foreach (var item in Model)
         {
+            var expiresString = item.ExpiresAt != null ? item.ExpiresAt.Value.ToString("yyyy-MM-dd HH:mm tt") : "Expired";
             <tr>
                 <td><a class="@item.Item.Rarity" asp-controller="Home" asp-action="Item" asp-route-id="@item.ItemID">@item.Item.Name</a></td>
                 <td class="text-right">@item.Marks.ToString("N0")</td>
-                @{ var expiresString = item.ExpiresAt != null ? item.ExpiresAt.Value.ToString("yyyy-MM-dd HH:mm tt") : "Expired"; }
                 <td class="text-right">@expiresString</td>
             </tr>
         }
