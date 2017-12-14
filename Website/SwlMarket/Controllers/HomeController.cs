@@ -83,13 +83,13 @@ namespace SwlMarket.Controllers
         
         public async Task<IActionResult> Search([FromQuery]string name)
         {
-            var items = await _marketContext.Items
+            var items = _marketContext.Items
                 .Where(i => i.Name.Contains(name))
-                .Take(40)
-                .Select(i => i.ID)
-                .ToListAsync();
+                .OrderBy(i => i.Name)
+                .Take(60)
+                .Select(i => i.ID);
 
-            var prices = _marketContext.Prices
+            var prices = await _marketContext.Prices
                 .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
                 .Include(p => p.Item)
                 .OrderByDescending(p => p.Item.Rarity)
@@ -98,9 +98,9 @@ namespace SwlMarket.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
-            ViewData["HasMaxItems"] = items.Count == 40;
+            ViewData["HasMaxItems"] = prices.Count == 60;
             
-            return View(await prices);
+            return View(prices);
         }
 
         public IActionResult About()
