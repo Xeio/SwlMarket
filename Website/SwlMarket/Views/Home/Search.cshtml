@@ -4,7 +4,7 @@
 
 @if ((bool)ViewData["HasMaxItems"])
 {
-    <span><strong>Search results limited to 40. You may want to narrow your search.</strong></span>
+    <span><strong>Search results limited to @ViewData["MaxItemCount"]. You may want to narrow your search.</strong></span>
 }
 @if (Model.Any())
 {

@@ -11,6 +11,8 @@ namespace SwlMarket.Controllers
 {
     public class HomeController : Controller
     {
+        const int MAX_SEARCH_RESULTS = 60;
+
         private readonly MarketContext _marketContext;
         public HomeController(MarketContext context)
         {
@@ -83,23 +85,19 @@ namespace SwlMarket.Controllers
         
         public async Task<IActionResult> Search([FromQuery]string name)
         {
-            var items = _marketContext.Items
-                .Where(i => i.Name.Contains(name))
-                .OrderBy(i => i.Name)
-                .Take(60)
-                .Select(i => i.ID);
-
             var prices = await _marketContext.Prices
                 .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
                 .Include(p => p.Item)
+                .Where(p => p.Item.Name.Contains(name))
                 .OrderByDescending(p => p.Item.Rarity)
                 .ThenBy(p => p.Item.Name)
-                .Where(p => items.Contains(p.ItemID))
+                .Take(MAX_SEARCH_RESULTS)
                 .AsNoTracking()
                 .ToListAsync();
 
-            ViewData["HasMaxItems"] = prices.Count == 60;
-            
+            ViewData["HasMaxItems"] = prices.Count == MAX_SEARCH_RESULTS;
+            ViewData["MaxItemCount"] = MAX_SEARCH_RESULTS;
+
             return View(prices);
         }
 
