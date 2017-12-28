@@ -63,8 +63,8 @@
   <ItemGroup>
     <Build Include="Tables\Items.sql" />
     <Build Include="Tables\Prices.sql" />
-    <Build Include="Tables\ApiKeys.sql" />
     <Build Include="Tables\MostRecentPrices.sql" />
+    <Build Include="Tables\IPs.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.ItemData.sql" />

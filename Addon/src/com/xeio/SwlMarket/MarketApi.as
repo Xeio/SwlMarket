@@ -15,12 +15,6 @@ class com.xeio.SwlMarket.MarketApi
     
     public function QueuePriceSubmit(newPrice: TradepostSearchResultData)
     {
-        if (!DistributedValue.GetDValue("SwlMarket_ApiKey") || DistributedValue.GetDValue("SwlMarket_ApiKey") == " ")
-        {
-            //Not configured, no-op
-            return;
-        }
-        
         m_itemsToSubmit.push(newPrice);
         
         if(!m_Browser)
@@ -51,8 +45,7 @@ class com.xeio.SwlMarket.MarketApi
                             "&expiresIn=" + item.m_ExpireDate +
                             "&rarity=" + item.m_Item.m_Rarity +
                             "&category=" + item.m_Item.m_ItemTypeGUI +
-                            "&ext=" + (item.m_Item.m_ColorLine == 43) + //Extraordinary
-                            "&apiKey=" + escape(DistributedValue.GetDValue("SwlMarket_ApiKey"));
+                            "&ext=" + (item.m_Item.m_ColorLine == 43); //Extraordinary
         
         m_Browser.OpenURL(url);
     }

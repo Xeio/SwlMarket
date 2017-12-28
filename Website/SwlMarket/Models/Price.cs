@@ -12,14 +12,12 @@ namespace SwlMarket.Models
         public DateTime Time { get; set; }
         public int? ExpiresIn { get; set; }
         public int Marks { get; set; }
-        public int? ApiKeyId { get; set; }
+        public int? IPId { get; set; }
 
         public Item Item { get; set; }
-        /// <summary>
-        /// API Key used to upload this price
-        /// </summary>
-        public ApiKey ApiKey { get; set; }
-        
+
+        public IPEntry IP { get; set; }
+
         [NotMapped]
         public DateTime? ExpiresAt
         {

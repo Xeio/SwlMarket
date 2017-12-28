@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?> 
 <Root>
   <Value name="SwlMarket" value="true" />
-  <Value name="SwlMarket_ApiKey" value=" " />
-  <Value name="SwlMarket_Url" value="https://swlmarket.azurewebsites.net" />
+  <Value name="SwlMarket_Url" value="http://swlmarket.azurewebsites.net" />
   <Archive name="SwlMarket_Cfg" />
 </Root>

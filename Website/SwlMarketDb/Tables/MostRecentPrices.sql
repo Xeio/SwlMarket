@@ -4,8 +4,8 @@
     [ItemId] INT NOT NULL PRIMARY KEY, 
     [Time] DATETIME NOT NULL,
     [Marks] INT NOT NULL,
-    [ApiKeyId] INT NULL, 
-    [ExpiresIn] INT NULL
+    [ExpiresIn] INT NULL, 
+    [IPId] INT NULL
 )
 
 GO
