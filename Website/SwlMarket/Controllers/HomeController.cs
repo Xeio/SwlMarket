@@ -21,12 +21,12 @@ namespace SwlMarket.Controllers
 
         public IActionResult Prices()
         {
-            var prices = _marketContext.Prices
-                .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
+            var prices = _marketContext.MostRecentPrices
                 .Include(p => p.Item)
                 .Where(ShowOnHome)
                 .OrderByDescending(p => p.Item.Rarity)
-                .ThenBy(p => p.Item.Name);
+                .ThenBy(p => p.Item.Name)
+                .ToList();
 
             return View(prices);
         }
@@ -85,8 +85,7 @@ namespace SwlMarket.Controllers
         
         public async Task<IActionResult> Search([FromQuery]string name)
         {
-            var prices = await _marketContext.Prices
-                .FromSql("select * from Prices where Id in (select max(Id) from Prices group by ItemId)")
+            var prices = await _marketContext.MostRecentPrices
                 .Include(p => p.Item)
                 .Where(p => p.Item.Name.Contains(name))
                 .OrderByDescending(p => p.Item.Rarity)

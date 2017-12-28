@@ -64,11 +64,15 @@
     <Build Include="Tables\Items.sql" />
     <Build Include="Tables\Prices.sql" />
     <Build Include="Tables\ApiKeys.sql" />
+    <Build Include="Tables\MostRecentPrices.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.ItemData.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SwlMarketDb.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\PopulateMostRecentPricesTable.sql" />
   </ItemGroup>
 </Project>

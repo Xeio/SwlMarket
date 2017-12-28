@@ -30,4 +30,14 @@ namespace SwlMarket.Models
             }
         }
     }
+
+    public class CurrentPrice : Price
+    {
+
+    }
+    
+    public class HistoricalPrice : Price
+    {
+
+    }
 }

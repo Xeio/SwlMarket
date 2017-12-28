@@ -51,7 +51,7 @@ namespace SwlMarket.Controllers
                 item.IsExtraordinary = extraordinary;
             }
 
-            var newPrice = new Price() { Item = item, Marks = price.Value, Time = DateTime.Now, ExpiresIn = expiresIn.Value, ApiKey = key };
+            var newPrice = new HistoricalPrice() { Item = item, Marks = price.Value, Time = DateTime.Now, ExpiresIn = expiresIn.Value, ApiKey = key };
             _marketContext.Prices.Add(newPrice);
 
             await _marketContext.SaveChangesAsync();
