@@ -1,12 +1,11 @@
-import com.GameInterface.Chat;
-import com.GameInterface.DistributedValue;
-import com.GameInterface.Inventory;
-import com.GameInterface.ShopInterface;
+import com.GameInterface.DistributedValueBase;
 import com.GameInterface.Tradepost;
 import com.GameInterface.TradepostSearchResultData;
 import com.Utils.Archive;
 import com.Utils.LDBFormat;
-import com.xeio.SwlMarket.MarketApi;
+import com.xeio.SwlMarket.AutoSearch;
+import com.xeio.SwlMarket.MarketApi
+import mx.utils.Delegate;
 
 
 class com.xeio.SwlMarket.SwlMarket
@@ -14,6 +13,9 @@ class com.xeio.SwlMarket.SwlMarket
 	private var m_swfRoot: MovieClip;
 	    
     private var m_marketApi:MarketApi;
+    private var m_autoSearch:AutoSearch;
+    
+    private var m_interval:Number;
 	
 	public static function main(swfRoot:MovieClip):Void 
 	{
@@ -32,6 +34,7 @@ class com.xeio.SwlMarket.SwlMarket
 	
 	public function OnUnload()
 	{
+        clearInterval(m_interval);
 	}
 	
 	public function Activate(config: Archive)
@@ -52,8 +55,13 @@ class com.xeio.SwlMarket.SwlMarket
             return;
         }
         m_marketApi = new MarketApi();
+        m_autoSearch = new AutoSearch();
         
         Tradepost.SignalSearchResult.Connect(SlotResultsReceived, this);
+        if (DistributedValueBase.GetDValue("SwlMarket_RunAutoSearch"))
+        {
+            m_interval = setInterval(Delegate.create(m_autoSearch, m_autoSearch.RunNextSearch), 60000);
+        }
 	}
     
     

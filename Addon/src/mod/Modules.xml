@@ -2,7 +2,7 @@
 <Root>
 <Module  name = "SwlMarket"
 	movie       = "SwlMarket\SwlMarket.swf"
-	flags       = "GMF_CFG_STORE_USER_CONFIG"
+	flags       = "GMF_CFG_STORE_USER_CONFIG | GMF_DONT_UNLOAD"
 	depth_layer = "Top"
 	sub_depth   = "2"
 	variable    = "SwlMarket"
