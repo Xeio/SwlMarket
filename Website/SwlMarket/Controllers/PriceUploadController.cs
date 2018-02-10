@@ -30,6 +30,8 @@ namespace SwlMarket.Controllers
             if (price == null) return false;
             if (rarity == null) return false;
             if (expiresIn == null || expiresIn < 1 || expiresIn > 24 * 60 * 60 * 7) return false; //Sanity check expire date to 0-7 days (really can't be more than 3 in the current SWL)
+            if (category == null) return false;
+            if (extraordinary == null) return false;
             
             var ipEntry = await _marketContext.IPs.SingleOrDefaultAsync(k => k.IP == HttpContext.Connection.RemoteIpAddress.ToString());
             if (ipEntry == null)
@@ -44,15 +46,7 @@ namespace SwlMarket.Controllers
             var item = await _marketContext.Items.SingleOrDefaultAsync(i => i.Name == name && i.Rarity == rarity);
             if(item == null)
             {
-                item = new Item() { Name = name, Rarity = rarity, ItemCategory = category };
-            }
-            if(item.ItemCategory == null)
-            {
-                item.ItemCategory = category;
-            }
-            if(item.IsExtraordinary == null)
-            {
-                item.IsExtraordinary = extraordinary;
+                item = new Item() { Name = name, Rarity = rarity, ItemCategory = category, IsExtraordinary = extraordinary };
             }
 
             var newPrice = new HistoricalPrice() { Item = item, Marks = price.Value, Time = DateTime.Now, ExpiresIn = expiresIn.Value, IP = ipEntry };
