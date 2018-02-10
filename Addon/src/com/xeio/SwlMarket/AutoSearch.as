@@ -45,6 +45,11 @@ class com.xeio.SwlMarket.AutoSearch
         //Upgrade
         [208570357, 5128296, "intricate", -1], //Glyph
         [208570357, 94364868, "", -1], //Signet
+        [208570357, 94364868, "p", -1],
+        [208570357, 94364868, "w", -1],
+        [208570357, 94364868, "y", -1],
+        [208570357, 94364868, "time", -1],
+        [208570357, 94364868, "", -1],
         //[208570357, 132606149], //Weapon mod
         //Weapon
         [98273118, -1, "", 4],
@@ -88,7 +93,6 @@ class com.xeio.SwlMarket.AutoSearch
         Tradepost.m_SearchCriteria.m_MinPowerLevel = currentItem[3]; //Rarity
         Tradepost.m_SearchCriteria.m_MaxPowerLevel = currentItem[3];
         
-        
         //Some Defaults
         Tradepost.m_SearchCriteria.m_TokenTypeVec = new Array();
         Tradepost.m_SearchCriteria.m_MinStackSize = 0;
@@ -100,7 +104,6 @@ class com.xeio.SwlMarket.AutoSearch
         Tradepost.m_SearchCriteria.m_MaxPrice = 99999999;
         Tradepost.m_SearchCriteria.m_ItemPlacement = -1;
         Tradepost.m_SearchCriteria.m_ItemClassVec = new Array();
-        
         
         Tradepost.MakeSearch();
         
