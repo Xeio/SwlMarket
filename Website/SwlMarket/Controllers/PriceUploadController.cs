@@ -48,6 +48,15 @@ namespace SwlMarket.Controllers
             {
                 item = new Item() { Name = name, Rarity = rarity, ItemCategory = category, IsExtraordinary = extraordinary };
             }
+            else
+            {
+                var mostRecentPrice = await _marketContext.MostRecentPrices.SingleAsync(mrp => mrp.ItemID == item.ID);
+                if (mostRecentPrice.Marks == price && mostRecentPrice.Time.AddHours(3) > DateTime.Now)
+                {
+                    //Ignore duplicated prices if they happen over a small time window
+                    return false;
+                }
+            }
 
             var newPrice = new HistoricalPrice() { Item = item, Marks = price.Value, Time = DateTime.Now, ExpiresIn = expiresIn.Value, IP = ipEntry };
             _marketContext.Prices.Add(newPrice);
