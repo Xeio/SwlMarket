@@ -2,7 +2,7 @@
 
 <h3 class="@Html.DisplayFor(modelitem => Model.Rarity)">@Html.DisplayFor(modelItem => Model.Name)</h3>
 <div id="priceChart">
-
+    <h2>Loading prices...</h2>
 </div>
 
 @section scripts
@@ -27,6 +27,7 @@
         $.ajax({
             url: '@Url.Action("Item", "PriceData", Model.ID)',
             success: function (result) {
+                document.getElementById('priceChart').innerHTML = "";
                 priceData.x = result.dates;
                 priceData.y = result.prices;
                 Plotly.plot('priceChart', [priceData]);
