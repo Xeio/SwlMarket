@@ -47,6 +47,10 @@ namespace SwlMarket.Models
         Pistols = 244175283,
         Hammer = 157308306,
         Blade = 93626565,
+        [Display(Name = "Agent Dossier")]
+        AgentDossiers = 253188674,
+        [Display(Name = "Agent Eqipment")]
+        AgentEquipment = 130331812,
     }
 
     public enum Rarity
