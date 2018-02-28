@@ -58,12 +58,17 @@ class com.xeio.SwlMarket.SwlMarket
         m_autoSearch = new AutoSearch();
         
         Tradepost.SignalSearchResult.Connect(SlotResultsReceived, this);
-        if (DistributedValueBase.GetDValue("SwlMarket_RunAutoSearch"))
+        if (DistributedValueBase.GetDValue("SwlMarket_RunAutoSearch") && LastSearchExpired())
         {
-            m_interval = setInterval(Delegate.create(m_autoSearch, m_autoSearch.RunNextSearch), 60000);
+            m_interval = setInterval(Delegate.create(m_autoSearch, m_autoSearch.RunNextSearch), 20000);
         }
 	}
     
+    private function LastSearchExpired() : Boolean
+    {
+        var lastSearch:Number = DistributedValueBase.GetDValue("SwlMarket_LastSearchTime");
+        return (new Date()).valueOf() > lastSearch + 18 * 60 * 60 * 1000;
+    }
     
     private function SlotResultsReceived() : Void
     {

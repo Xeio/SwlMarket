@@ -1,4 +1,5 @@
 import com.GameInterface.Tradepost;
+import com.GameInterface.DistributedValueBase;
 
 class com.xeio.SwlMarket.AutoSearch
 {
@@ -49,6 +50,7 @@ class com.xeio.SwlMarket.AutoSearch
         [208570357, 94364868, "w", -1],
         [208570357, 94364868, "y", -1],
         [208570357, 94364868, "time", -1],
+        [208570357, 94364868, "cr", -1],
         //[208570357, 132606149], //Weapon mod
         //Weapon
         [98273118, -1, "", 4],
@@ -73,6 +75,7 @@ class com.xeio.SwlMarket.AutoSearch
         if (m_searchCount > m_searches.length)
         {
             //Just stop searching once we've searched all the items in the list
+            DistributedValueBase.SetDValue("SwlMarket_LastSearchTime", (new Date()).valueOf());
             return;
         }
         
