@@ -25,7 +25,7 @@
     font-weight: bold;
 }
 .Epic {
-    color: purple;
+    color: #a46ae7;
     font-weight: bold;
 }
 .Mythic {
@@ -33,6 +33,11 @@
     font-weight: bold;
 }
 .Legendary {
-    color: red;
+    color: #f12f6e;
     font-weight: bold;
+}
+
+/*Bootstrap overrides*/
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #2A2A2A;
 }

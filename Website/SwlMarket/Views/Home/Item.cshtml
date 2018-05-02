@@ -30,7 +30,14 @@
                 document.getElementById('priceChart').innerHTML = "";
                 priceData.x = result.dates;
                 priceData.y = result.prices;
-                Plotly.plot('priceChart', [priceData]);
+                var layout = {
+                    font: {
+                        color: '#ffffff'
+                    },
+                    paper_bgcolor: '#222222',
+                    plot_bgcolor: '#222222',
+                };
+                Plotly.plot('priceChart', [priceData], layout);
             },
             error: function () {
                 $('#priceChart').html("Unable to retrieve pricing data");
