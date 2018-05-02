@@ -60,6 +60,7 @@ class com.xeio.SwlMarket.SwlMarket
         Tradepost.SignalSearchResult.Connect(SlotResultsReceived, this);
         if (DistributedValueBase.GetDValue("SwlMarket_RunAutoSearch") && LastSearchExpired())
         {
+            clearInterval(m_interval);
             m_interval = setInterval(Delegate.create(m_autoSearch, m_autoSearch.RunNextSearch), 20000);
         }
 	}

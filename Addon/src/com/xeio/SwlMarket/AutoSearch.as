@@ -85,6 +85,12 @@ class com.xeio.SwlMarket.AutoSearch
     
     public function RunNextSearch()
     {
+        if (DistributedValueBase.GetDValue("tradepost_window") && !DistributedValueBase.GetDValue("SwlMarket_DebugMode"))
+        {
+            //Skip auto-search while user has tradepost open unless debugging
+            return;
+        }
+        
         if (m_searchCount > m_searches.length)
         {
             //Just stop searching once we've searched all the items in the list
