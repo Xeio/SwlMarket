@@ -24,23 +24,24 @@
             mode: 'lines+markers',
         };
 
-        $.ajax({
-            url: '@Url.Action("Item", "PriceData", Model.ID)',
-            success: function (result) {
-                document.getElementById('priceChart').innerHTML = "";
-                priceData.x = result.dates;
-                priceData.y = result.prices;
-                var layout = {
-                    font: {
-                        color: '#ffffff'
-                    },
-                    paper_bgcolor: '#222222',
-                    plot_bgcolor: '#222222',
-                };
-                Plotly.plot('priceChart', [priceData], layout);
-            },
-            error: function () {
-                $('#priceChart').html("Unable to retrieve pricing data");
+        fetch('@Url.Action("Item", "PriceData", Model.ID)').then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    document.getElementById('priceChart').innerHTML = "";
+                    priceData.x = data.dates;
+                    priceData.y = data.prices;
+                    var layout = {
+                        font: {
+                            color: '#ffffff'
+                        },
+                        paper_bgcolor: '#222222',
+                        plot_bgcolor: '#222222',
+                    };
+                    Plotly.plot('priceChart', [priceData], layout);
+                });
+            }
+            else {
+                document.getElementById('priceChart').innerHTML = "Unable to retrieve pricing data";
             }
         });
     </script>
