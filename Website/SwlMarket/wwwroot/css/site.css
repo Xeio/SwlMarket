@@ -1,18 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+    padding-top: 5rem;
+    padding-bottom: 1rem;
 }
 
 /* Rarity coloring*/
@@ -37,7 +25,14 @@
     font-weight: bold;
 }
 
-/*Bootstrap overrides*/
-.table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: #2A2A2A;
+.itemRow > td {
+    padding: .5rem !important
+}
+
+.itemCategory {
+    padding: .1rem
+}
+
+.nav-item {
+    margin-right: 1rem
 }
