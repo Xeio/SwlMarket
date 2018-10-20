@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SwlMarket.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace SwlMarket.Controllers
 {
@@ -17,12 +18,16 @@ namespace SwlMarket.Controllers
             _marketContext = context;
         }
 
-        [HttpGet("Item/{id}")]
-        public async Task<IActionResult> Item(int id)
+        [HttpGet("Item/{id}/{allTime?}")]
+        public async Task<IActionResult> Item(int id, bool allTime = false)
         {
-            var prices = await _marketContext.Prices
-                .Where(p => p.ItemID == id)
-                .OrderBy(p => p.Time)
+            var pricesQuery = _marketContext.Prices
+                .Where(p => p.ItemID == id);
+            if (!allTime)
+            {
+                pricesQuery = pricesQuery.Where(p => p.Time > DateTime.Now.AddMonths(-6));
+            }
+            var prices = await pricesQuery.OrderBy(p => p.Time)
                 .AsNoTracking()
                 .ToListAsync();
 

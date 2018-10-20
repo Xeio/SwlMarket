@@ -70,14 +70,19 @@ namespace SwlMarket.Controllers
             return true;
         }
 
-        [HttpGet("/Home/Item/{id}")]
-        public async Task<IActionResult> Item(int id)
+        [HttpGet("/Home/Item/{id}/{allTime?}")]
+        public async Task<IActionResult> Item(int id, bool allTime = false)
         {
             var item = await _marketContext.Items.SingleOrDefaultAsync(i => i.ID == id);
             
             if(item == null)
             {
                 return NotFound();
+            }
+
+            if (allTime)
+            {
+                ViewData["AllTime"] = true;
             }
 
             return View(item);
