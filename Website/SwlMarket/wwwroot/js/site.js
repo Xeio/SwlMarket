@@ -5,6 +5,10 @@ function updateTimeSince() {
     for (let element of document.getElementsByClassName("timesince")) {
         let timestamp = Date.parse(element.textContent);
         let minutesDiff = (current - timestamp) / 1000 / 60;
+        if (minutesDiff < 0) {
+            element.textContent = `A short time ago`;
+            continue;
+        }
         if (minutesDiff < 60) {
             element.textContent = `${Math.trunc(minutesDiff)} minutes ago`;
             continue;

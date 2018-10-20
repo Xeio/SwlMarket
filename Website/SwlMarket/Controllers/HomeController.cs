@@ -33,7 +33,7 @@ namespace SwlMarket.Controllers
 
         private bool ShowOnHome(Price price)
         {
-            if (price.Time.AddDays(7) < DateTime.Now) return false;
+            if (price.Time.AddDays(7) < DateTime.UtcNow) return false;
             switch (price.Item.ItemCategory)
             {
                 case ItemCategory.AssaultRifle:

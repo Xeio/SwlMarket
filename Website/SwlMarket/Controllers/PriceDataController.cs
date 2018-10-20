@@ -25,7 +25,7 @@ namespace SwlMarket.Controllers
                 .Where(p => p.ItemID == id);
             if (!allTime)
             {
-                pricesQuery = pricesQuery.Where(p => p.Time > DateTime.Now.AddMonths(-6));
+                pricesQuery = pricesQuery.Where(p => p.Time > DateTime.UtcNow.AddMonths(-6));
             }
             var prices = await pricesQuery.OrderBy(p => p.Time)
                 .AsNoTracking()

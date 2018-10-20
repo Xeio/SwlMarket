@@ -7,9 +7,25 @@ namespace SwlMarket.Models
 {
     public class Price
     {
+        private DateTime _time;
+
         public int Id { get; set; }
         public int ItemID { get; set; }
-        public DateTime Time { get; set; }
+        public DateTime Time
+        {
+            get
+            {
+                if (_time.Kind == DateTimeKind.Unspecified)
+                {
+                    _time = DateTime.SpecifyKind(_time, DateTimeKind.Utc);
+                }
+                return _time;
+            }
+            set
+            {
+                _time = value;
+            }
+        }
         public int? ExpiresIn { get; set; }
         public int Marks { get; set; }
         public int? IPId { get; set; }
@@ -17,16 +33,6 @@ namespace SwlMarket.Models
         public Item Item { get; set; }
 
         public IPEntry IP { get; set; }
-
-        [NotMapped]
-        public DateTime? ExpiresAt
-        {
-            get
-            {
-                var expirationDate = Time.AddSeconds(ExpiresIn ?? 0);
-                return expirationDate > DateTime.Now ? (DateTime?)expirationDate : null;
-            }
-        }
     }
 
     public class CurrentPrice : Price
