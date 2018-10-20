@@ -11,6 +11,6 @@
     var divId = "data" + group.Key;
     <h4 class="itemCategory"><a data-toggle="collapse" href="@("#"+divId)">@group.Key.DisplayName("Uncategorized")</a></h4>
     <div id="@divId" class="collapse">
-        @Html.Partial("PriceDataTable", group)
+        @await Html.PartialAsync("PriceDataTable", group)
     </div>
 }
