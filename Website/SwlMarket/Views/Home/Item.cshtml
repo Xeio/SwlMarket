@@ -1,13 +1,15 @@
 ﻿@model SwlMarket.Models.Item
 
 <h3 class="@Html.DisplayFor(modelitem => Model.Rarity)">@Html.DisplayFor(modelItem => Model.Name)</h3>
-@if (!ViewData.ContainsKey("AllTime"))
-{
-    <a href="@Url.Action("Item", "Home", new { Model.ID, allTime = true })">Show prices from all time</a>
-}
+
 <div id="priceChart">
     <h2>Loading prices...</h2>
 </div>
+
+@if (!ViewData.ContainsKey("AllTime"))
+{
+    <a href="#" id="showAllTimeLink">Show prices from all time</a>
+}
 
 @section scripts
     {
@@ -21,24 +23,35 @@
             mode: 'lines+markers',
         };
 
-        fetch('@Url.Action("Item", "PriceData", new { Model.ID, allTime = ViewData["AllTime"] })').then(response => {
-            if (response.ok) {
-                response.json().then(data => {
-                    document.getElementById('priceChart').innerHTML = "";
-                    priceData.x = data.dates;
-                    priceData.y = data.prices;
-                    var layout = {
-                        font: {
-                            color: '#ffffff'
-                        },
-                        paper_bgcolor: '#222222',
-                        plot_bgcolor: '#222222',
-                    };
-                    Plotly.plot('priceChart', [priceData], layout);
-                });
-            }
-            else {
-                document.getElementById('priceChart').innerHTML = "Unable to retrieve pricing data";
+        function fetchAndDisplayPlot(url) {
+            fetch(url).then(response => {
+                if (response.ok) {
+                    response.json().then(data => {
+                        document.getElementById('priceChart').innerHTML = "";
+                        priceData.x = data.dates;
+                        priceData.y = data.prices;
+                        var layout = {
+                            font: {
+                                color: '#ffffff'
+                            },
+                            paper_bgcolor: '#222222',
+                            plot_bgcolor: '#222222',
+                        };
+                        Plotly.newPlot('priceChart', [priceData], layout);
+                    });
+                }
+                else {
+                    document.getElementById('priceChart').innerHTML = "Unable to retrieve pricing data";
+                }
+            });
+        }
+
+        fetchAndDisplayPlot('@Url.Action("Item", "PriceData", new { Model.ID, allTime = ViewData["AllTime"] })');
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('showAllTimeLink').onclick = function () {
+                fetchAndDisplayPlot('@Url.Action("Item", "PriceData", new { Model.ID, allTime = true })');
+                document.getElementById('showAllTimeLink').style.display = "none";
             }
         });
     </script>
