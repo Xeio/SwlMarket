@@ -68,7 +68,7 @@ class com.xeio.SwlMarket.SwlMarket
     private function LastSearchExpired() : Boolean
     {
         var lastSearch:Number = DistributedValueBase.GetDValue("SwlMarket_LastSearchTime");
-        return (new Date()).valueOf() > lastSearch + 18 * 60 * 60 * 1000;
+        return (new Date()).valueOf() > lastSearch + 14 * 60 * 60 * 1000;
     }
     
     private function SlotResultsReceived() : Void
