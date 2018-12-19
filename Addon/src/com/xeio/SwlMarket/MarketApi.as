@@ -46,7 +46,6 @@ class com.xeio.SwlMarket.MarketApi
         var url:String = DistributedValue.GetDValue("SwlMarket_Url") +
                             "/api/PriceUpload?name=" + escape(m_lastSentItem.m_Item.m_Name) +
                             "&price=" + m_lastSentItem["u_price"] +
-                            "&expiresIn=" + m_lastSentItem.m_ExpireDate +
                             "&rarity=" + m_lastSentItem.m_Item.m_Rarity +
                             "&category=" + m_lastSentItem.m_Item.m_ItemTypeGUI +
                             "&ext=" + (m_lastSentItem.m_Item.m_ColorLine == 43); //Extraordinary

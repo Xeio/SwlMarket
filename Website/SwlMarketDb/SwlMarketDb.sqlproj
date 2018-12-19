@@ -67,9 +67,6 @@
     <Build Include="Tables\IPs.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Scripts\Script.ItemData.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <RefactorLog Include="SwlMarketDb.refactorlog" />
   </ItemGroup>
   <ItemGroup>

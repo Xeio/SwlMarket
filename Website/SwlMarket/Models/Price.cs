@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SwlMarket.Models
 {
@@ -26,7 +23,6 @@ namespace SwlMarket.Models
                 _time = value;
             }
         }
-        public int? ExpiresIn { get; set; }
         public int Marks { get; set; }
         public int? IPId { get; set; }
 

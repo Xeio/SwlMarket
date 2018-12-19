@@ -20,16 +20,14 @@ namespace SwlMarket.Controllers
 
         [HttpGet]
         public async Task<bool> Get([FromQuery]string name,
-            [FromQuery]int? price, 
-            [FromQuery]Rarity? rarity, 
-            [FromQuery]ItemCategory? category, 
-            [FromQuery]int? expiresIn,
+            [FromQuery]int? price,
+            [FromQuery]Rarity? rarity,
+            [FromQuery]ItemCategory? category,
             [FromQuery(Name = "ext")]bool? extraordinary)
         {
             if (string.IsNullOrWhiteSpace(name)) return false;
             if (price == null) return false;
             if (rarity == null) return false;
-            if (expiresIn == null || expiresIn < 1 || expiresIn > 24 * 60 * 60 * 7) return false; //Sanity check expire date to 0-7 days (really can't be more than 3 in the current SWL)
             if (category == null) return false;
             if (extraordinary == null) return false;
             
@@ -58,7 +56,7 @@ namespace SwlMarket.Controllers
                 }
             }
 
-            var newPrice = new HistoricalPrice() { Item = item, Marks = price.Value, Time = DateTime.UtcNow, ExpiresIn = expiresIn.Value, IP = ipEntry };
+            var newPrice = new HistoricalPrice() { Item = item, Marks = price.Value, Time = DateTime.UtcNow, IP = ipEntry };
             _marketContext.Prices.Add(newPrice);
 
             await _marketContext.SaveChangesAsync();
