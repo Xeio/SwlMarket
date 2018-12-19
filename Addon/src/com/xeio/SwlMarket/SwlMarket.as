@@ -5,6 +5,7 @@ import com.Utils.Archive;
 import com.Utils.LDBFormat;
 import com.xeio.SwlMarket.AutoSearch;
 import com.xeio.SwlMarket.MarketApi
+import com.xeio.SwlMarket.Utils;
 import mx.utils.Delegate;
 
 
@@ -85,12 +86,14 @@ class com.xeio.SwlMarket.SwlMarket
                 price = Math.round(price / result.m_Item.m_StackSize);
             }
             
-            if (!minimumPrices[result.m_Item.m_Name] || minimumPrices[result.m_Item.m_Name].u_price > price)
+            var currentEntry = Utils.FirstOrNull(minimumPrices, function(p) { return p.m_Item.m_Name == result.m_Item.m_Name && p.m_Item.m_Rarity == result.m_Item.m_Rarity; })
+            if (!currentEntry || currentEntry.u_price > price)
             {
+                Utils.Remove(minimumPrices, currentEntry);
                 result["u_price"] = price;
-                minimumPrices[result.m_Item.m_Name] = result;
+                minimumPrices.push(result);
             }
-        }        
+        }
 
         for (var i in minimumPrices)
         {
