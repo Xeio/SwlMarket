@@ -23,10 +23,10 @@ namespace SwlMarket.Controllers
         {
             var prices = _marketContext.MostRecentPrices
                 .Include(p => p.Item)
-                .Where(ShowOnHome)
                 .OrderByDescending(p => p.Item.Rarity)
                 .ThenBy(p => p.Item.Name)
-                .ToList();
+                .AsNoTracking()
+                .Where(ShowOnHome);
 
             return View(prices);
         }
