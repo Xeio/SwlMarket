@@ -1,4 +1,6 @@
 import com.GameInterface.DistributedValueBase;
+import com.GameInterface.Game.Character;
+import com.GameInterface.Game.CharacterBase;
 import com.GameInterface.Tradepost;
 import com.GameInterface.TradepostSearchResultData;
 import com.Utils.Archive;
@@ -37,6 +39,7 @@ class com.xeio.SwlMarket.SwlMarket
 	{
         clearInterval(m_interval);
         m_interval = 0;
+        CharacterBase.SignalCharacterEnteredReticuleMode.Disconnect(m_marketApi.CheckDisposeBrowser, m_marketApi);
 	}
 	
 	public function Activate(config: Archive)
@@ -68,6 +71,8 @@ class com.xeio.SwlMarket.SwlMarket
             }
             m_interval = setInterval(Delegate.create(m_autoSearch, m_autoSearch.RunNextSearch), 20000);
         }
+        
+        CharacterBase.SignalCharacterEnteredReticuleMode.Connect(m_marketApi.CheckDisposeBrowser, m_marketApi);
 	}
     
     private function LastSearchExpired() : Boolean

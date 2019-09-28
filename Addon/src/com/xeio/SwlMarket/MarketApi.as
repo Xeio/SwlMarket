@@ -1,5 +1,6 @@
 import com.GameInterface.Browser.Browser;
 import com.GameInterface.DistributedValue;
+import com.GameInterface.Game.Character;
 import com.GameInterface.TradepostSearchResultData;
 import mx.utils.Delegate;
 
@@ -10,6 +11,7 @@ class com.xeio.SwlMarket.MarketApi
     var m_lastSentItem:TradepostSearchResultData;
     var m_browserStuckTimeout:Number;
     var m_submitTimeout:Number;
+    var m_disposeBrowser:Boolean;
     
     public function MarketApi()
     {
@@ -29,6 +31,13 @@ class com.xeio.SwlMarket.MarketApi
     
     private function Upload()
     {
+        if (m_disposeBrowser)
+        {
+            clearTimeout(m_submitTimeout);
+            m_submitTimeout = setTimeout(Delegate.create(this, Upload), 1000);
+            return;
+        }
+        
         if (!m_Browser)
         {
             m_Browser = new Browser(18, 100, 100);
@@ -38,8 +47,7 @@ class com.xeio.SwlMarket.MarketApi
         m_lastSentItem = TradepostSearchResultData(m_itemsToSubmit.pop());
         if (!m_lastSentItem)
         {
-            m_Browser.CloseBrowser();
-            m_Browser = undefined;
+            DisposeBrowser();
             return;
         }
         
@@ -63,8 +71,7 @@ class com.xeio.SwlMarket.MarketApi
         
         if (this.m_itemsToSubmit.length == 0)
         {
-            m_Browser.CloseBrowser();
-            m_Browser = undefined;
+            DisposeBrowser();
         }
         else
         {
@@ -73,13 +80,39 @@ class com.xeio.SwlMarket.MarketApi
         }
     }
     
+    public function CheckDisposeBrowser()
+    {
+        if (m_disposeBrowser)
+        {
+            DisposeBrowser(false);
+        }
+    }
+    
+    private function DisposeBrowser()
+    {
+        if (Character.IsInReticuleMode())
+        {
+            m_Browser.CloseBrowser();
+            m_Browser = undefined;
+            m_disposeBrowser = false;
+            
+            if (this.m_itemsToSubmit.length > 0)
+            {
+                clearTimeout(m_submitTimeout);
+                m_submitTimeout = setTimeout(Delegate.create(this, Upload), 1000);
+            }
+        }
+        else
+        {
+            m_disposeBrowser = true;
+        }
+    }
+    
     public function Timeout()
     {
+        QueuePriceSubmit(m_lastSentItem);
         m_Browser.Stop();
         m_Browser.SignalBrowserShowPage.Disconnect(PageLoaded, this);
-        m_Browser.CloseBrowser();
-        m_Browser = undefined;
-        
-        QueuePriceSubmit(m_lastSentItem);
+        DisposeBrowser();        
     }
 }
