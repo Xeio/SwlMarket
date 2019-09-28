@@ -38,8 +38,7 @@ class com.xeio.SwlMarket.MarketApi
         m_lastSentItem = TradepostSearchResultData(m_itemsToSubmit.pop());
         if (!m_lastSentItem)
         {
-            m_Browser.CloseBrowser();
-            m_Browser = undefined;
+            CloseBrowser();
             return;
         }
         
@@ -62,10 +61,7 @@ class com.xeio.SwlMarket.MarketApi
         m_Browser.Stop();
         
         if (this.m_itemsToSubmit.length == 0)
-        {
-            m_Browser.CloseBrowser();
-            m_Browser = undefined;
-        }
+            CloseBrowser();
         else
         {
             clearTimeout(m_submitTimeout);
@@ -77,9 +73,38 @@ class com.xeio.SwlMarket.MarketApi
     {
         m_Browser.Stop();
         m_Browser.SignalBrowserShowPage.Disconnect(PageLoaded, this);
+        CloseBrowser();
+        
+        QueuePriceSubmit(m_lastSentItem);
+    }
+    
+    
+    //Closing Browser resets focus to null. If the sell item window is open, restore the focus and the selected text
+    public function CloseBrowser()
+    {
+        var tradepostSellField:TextField = _root.tradepost.m_Window.m_Content.m_ViewsContainer.m_BuyView.m_SellItemPromptWindow.m_ItemCounter.m_TextInput.textField;
+        
+        //Store current selected text and cursor pos
+        var selectedIndices:Array = null;
+        if (tradepostSellField != undefined && tradepostSellField.selectionEndIndex - tradepostSellField.selectionBeginIndex > 0)
+        {
+            //if selection is made from end to start, reverse stored selection
+            if (tradepostSellField.caretIndex == tradepostSellField.selectionBeginIndex)
+                selectedIndices = [tradepostSellField.selectionEndIndex, tradepostSellField.selectionBeginIndex];
+            else
+                selectedIndices = [tradepostSellField.selectionBeginIndex, tradepostSellField.selectionEndIndex];
+        }
+        
+        //Actually close the browser
         m_Browser.CloseBrowser();
         m_Browser = undefined;
         
-        QueuePriceSubmit(m_lastSentItem);
+        //Restore focus and selection
+        if (tradepostSellField != undefined)
+        {
+            Selection.setFocus(tradepostSellField);
+            if (selectedIndices != null)
+                Selection.setSelection(selectedIndices[0], selectedIndices[1]);
+        }
     }
 }
