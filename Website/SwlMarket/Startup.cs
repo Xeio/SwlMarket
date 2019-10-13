@@ -23,7 +23,7 @@ namespace SwlMarket
             services.AddDbContext<MarketContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc(mvcOptions => mvcOptions.EnableEndpointRouting = false);
+            services.AddMvc();
 
             services.AddApplicationInsightsTelemetry();
         }
@@ -42,11 +42,11 @@ namespace SwlMarket
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Prices}");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Prices}");
             });
         }
     }
