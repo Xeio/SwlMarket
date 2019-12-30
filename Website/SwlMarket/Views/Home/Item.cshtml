@@ -27,17 +27,22 @@
             fetch(url).then(response => {
                 if (response.ok) {
                     response.json().then(data => {
-                        document.getElementById('priceChart').innerHTML = "";
-                        priceData.x = data.dates;
-                        priceData.y = data.prices;
-                        var layout = {
-                            font: {
-                                color: '#ffffff'
-                            },
-                            paper_bgcolor: '#222222',
-                            plot_bgcolor: '#222222',
-                        };
-                        Plotly.newPlot('priceChart', [priceData], layout);
+                        if (data.prices.length > 0) {
+                            document.getElementById('priceChart').innerHTML = "";
+                            priceData.x = data.dates;
+                            priceData.y = data.prices;
+                            var layout = {
+                                font: {
+                                    color: '#ffffff'
+                                },
+                                paper_bgcolor: '#222222',
+                                plot_bgcolor: '#222222',
+                            };
+                            Plotly.newPlot('priceChart', [priceData], layout);
+                        }
+                        else {
+                            document.getElementById('priceChart').innerHTML = "No listings in last 6 months.";
+                        }
                     });
                 }
                 else {
