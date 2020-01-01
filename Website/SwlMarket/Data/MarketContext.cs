@@ -11,7 +11,6 @@ namespace SwlMarket.Data
 
         public DbSet<Item> Items { get; set; }
         public DbSet<HistoricalPrice> Prices { get; set; }
-        public DbSet<ApiKey> ApiKeys { get; set; }
         public DbSet<CurrentPrice> MostRecentPrices { get; set; }
         public DbSet<IPEntry> IPs { get; set; }
     }

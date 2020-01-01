@@ -92,7 +92,7 @@ namespace SwlMarket.Controllers
         {
             var prices = await _marketContext.MostRecentPrices
                 .Include(p => p.Item)
-                .Where(p => p.Item.Name.Contains(name))
+                .Where(p => EF.Functions.Like(p.Item.Name, $"%{name}%"))
                 .OrderByDescending(p => p.Item.Rarity)
                 .ThenBy(p => p.Item.Name)
                 .Take(MAX_SEARCH_RESULTS)
