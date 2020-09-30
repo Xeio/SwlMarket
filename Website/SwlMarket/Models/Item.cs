@@ -33,6 +33,7 @@ namespace SwlMarket.Models
         Signet = 94364868,
         Glyph = 5128296,
         Imbuer = 84122562,
+        Catalyst = 145245236,
         //Weapon
         Shotgun = 41012030,
         [Display(Name = "Blood Magic Focus")]
